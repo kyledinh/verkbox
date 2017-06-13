@@ -1,0 +1,9 @@
+{
+   "appname" : "myapp",
+   "appversion" :  "0.0.1",
+   "db_server" : "localhost",
+   "db_name" : "myapp_db",
+   "db_user" : "myapp_user",
+   "db_password" : "myapp_password",
+   "postgres_version" : "9.5"
+}

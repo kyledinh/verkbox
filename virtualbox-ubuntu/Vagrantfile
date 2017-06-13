@@ -1,0 +1,36 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  # Ubuntu-13.10
+  config.vm.box = "ubuntu/xenial64"
+  config.vm.synced_folder "../.", "/home/ubuntu/code"
+  config.ssh.forward_x11 = true
+  config.vm.network "forwarded_port", guest: 8000, host: 8000, auto_correct: true
+  config.vm.network "forwarded_port", guest: 3000, host: 3000, auto_correct: true
+  config.vm.network "forwarded_port", guest: 5432, host: 5432, auto_correct: true
+  config.vm.network "private_network", ip: "192.168.10.10"
+  config.vm.provider :virtualbox do |virtualbox|
+    virtualbox.customize ["modifyvm", :id, "--name", "verkbox"] # Name the INSTANCE (app), make unique
+    virtualbox.customize ["modifyvm", :id, "--memory", "2048"]
+  end
+
+  config.vm.provision :file do |file|
+    file.source = "cfg.json"
+    file.destination = "/tmp/cfg.json"
+  end
+  config.vm.provision :file do |file|
+    file.source = "lib_fn.sh"
+    file.destination = "/tmp/lib_fn.sh"
+  end
+  config.vm.provision :file do |file|
+    file.source = "bootstrap_ubuntu.sh"
+    file.destination = "/tmp/bootstrap_ubuntu.sh"
+  end
+
+  config.vm.provision :shell, :path => "bootstrap_ubuntu.sh"
+
+end
