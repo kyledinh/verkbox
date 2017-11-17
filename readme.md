@@ -8,6 +8,10 @@ To customize, edit the `bootstrap_ubuntu.sh` file, by uncommenting the install f
 in the MAIN section for the software you like to provision. The functions are found in the `lib_fn.sh` file. Edit the `cfg.json` for
 your own project settings.
 
+## UPDATE!!!
+
+Since [Docker For Mac](https://www.docker.com/docker-mac) has improved and works brilliantly,  I recommend switching to using containers with Docker. It's simpler, more concise and easier to use and script. I have a Docker repo with images and scripts I use: https://github.com/kyledinh/docker.
+
 Install And Run
 -------
 * Install VirtualBox (https://www.virtualbox.org/wiki/Downloads)
